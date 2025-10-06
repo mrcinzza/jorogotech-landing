@@ -73,6 +73,13 @@ npm run typecheck
 npm run lint
 ```
 
+## 🧪 Testes
+
+Execute os testes automatizados com:
+```bash
+npm run test
+```
+
 ## 🌐 Deploy
 
 ### Deploy na Vercel (Recomendado)
@@ -92,6 +99,8 @@ Seu site estará disponível em: `jorogotech-landing.vercel.app`
 - **Netlify**: Conecte o repositório e faça deploy automático
 - **GitHub Pages**: Use `gh-pages` para deploy estático
 - **Railway**: Deploy com suporte a variáveis de ambiente
+
+Para deploy, use plataformas como Vercel ou Netlify. Certifique-se de configurar HTTPS e cache para melhor performance.
 
 ## 📂 Estrutura do Projeto
 
@@ -131,6 +140,8 @@ O projeto inclui otimizações completas de SEO:
 - Sitemap pronto para ser gerado
 - URLs canônicas
 - Palavras-chave estratégicas: SaaS, Inteligência Artificial, Planeamento Financeiro
+
+Certifique-se de que o `sitemap.xml` e `robots.txt` estão configurados corretamente para indexação.
 
 ## 🤝 Contribuindo
 

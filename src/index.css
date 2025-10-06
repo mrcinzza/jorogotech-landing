@@ -20,6 +20,15 @@
   h1, h2, h3 {
     letter-spacing: -0.01em;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
 }
 
 @layer components {
@@ -43,6 +52,12 @@
 /* Small responsive tweaks */
 @media (min-width: 1024px) {
   .hero-graphic { height: 520px; }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
 }
 
 /* Dark mode overrides (Tailwind dark: utilities used in markup) */
