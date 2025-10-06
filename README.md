@@ -86,7 +86,7 @@ npm run lint
    - Output Directory: `dist`
 5. Clique em "Deploy"
 
-Seu site estará disponível em: `https://jorogotech.vercel.app`
+Seu site estará disponível em: `jorogotech-landing.vercel.app`
 
 ### Outras opções de deploy
 - **Netlify**: Conecte o repositório e faça deploy automático
@@ -150,24 +150,8 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 **Jorge Roberto Gonçalves**
 JOROGOTech - Tecnologia e IA ao Serviço da Inovação
 
----
 
-## 💼 Dados para Lemon Squeezy
-
-**Website:** https://jorogotech.vercel.app
-
-**Descrição do Produto:**
-
-A JOROGOTech é uma startup especializada em soluções SaaS com Inteligência Artificial. Oferecemos produtos digitais inovadores como:
-
-- **Assistente de Atendimento com IA**: Automatiza suporte ao cliente com respostas inteligentes e consistentes
-- **Aviator Analyzer Pro**: Plataforma de análise preditiva com machine learning
-- **Finance Planner**: Ferramenta de planeamento financeiro inteligente
-
-Os nossos clientes conhecem os produtos através do website e redes sociais, e realizam pagamentos de subscrição via Lemon Squeezy.
-
----
 
 ⭐ **Se este projeto foi útil, considere dar uma estrela no GitHub!**
 
-🌐 **Website:** [https://jorogotech.vercel.app](https://jorogotech.vercel.app)
+🌐 **Website:** [https://jorogotech-landing.vercel.app](https://jorogotech-landing.vercel.app)
