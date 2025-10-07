@@ -200,6 +200,8 @@ export default function App(): JSX.Element {
   const [iaResult, setIaResult] = useState<any>(null);
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
+  const [modal, setModal] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect(() => {
     localStorage.setItem("lang", language);
@@ -312,7 +314,7 @@ export default function App(): JSX.Element {
                 <motion.button whileHover={{ scale: 1.03 }} className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg flex items-center gap-3 font-semibold shadow-md">
                   {t.products} <ArrowRight size={18} />
                 </motion.button>
-                <motion.button whileHover={{ scale: 1.03 }} className="px-6 py-3 bg-white border-2 border-gray-200 dark:bg-slate-800 dark:border-slate-700 text-gray-700 dark:text-slate-200 rounded-lg hover:border-blue-500 hover:text-blue-600 transition-all font-semibold">
+                <motion.button onClick={() => setModal("contact")} whileHover={{ scale: 1.03 }} className="px-6 py-3 bg-white border-2 border-gray-200 dark:bg-slate-800 dark:border-slate-700 text-gray-700 dark:text-slate-200 rounded-lg hover:border-blue-500 hover:text-blue-600 transition-all font-semibold">
                   {t.contact}
                 </motion.button>
               </div>
@@ -565,9 +567,10 @@ export default function App(): JSX.Element {
             <div>
               <h3 className="text-lg font-semibold mb-4">Links Rápidos</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white">Termos</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Privacidade</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Suporte</a></li>
+                <li><button onClick={() => setModal("terms")} className="text-gray-400 hover:text-white">Termos</button></li>
+                <li><button onClick={() => setModal("privacy")} className="text-gray-400 hover:text-white">Privacidade</button></li>
+                <li><button onClick={() => setModal("support")} className="text-gray-400 hover:text-white">Suporte</button></li>
+                <li><button onClick={() => setModal("contact")} className="text-gray-400 hover:text-white">Contacto</button></li>
               </ul>
             </div>
 
@@ -586,6 +589,104 @@ export default function App(): JSX.Element {
           </div>
         </div>
       </footer>
+
+      {/* Modals */}
+      {modal === "terms" && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-slate-800 p-6 rounded-lg max-w-lg w-full relative">
+            <button onClick={() => setModal(null)} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-gray-300">&times;</button>
+            <h2 className="text-xl font-bold mb-4">Termos de Uso</h2>
+            <p className="text-gray-600 dark:text-slate-300">Bem-vindo à JOROGOTech. Ao utilizar nossos serviços, você concorda com os seguintes termos:</p>
+            <ul className="list-disc pl-5 text-gray-600 dark:text-slate-300 mt-3">
+              <li>Uso Responsável: Utilize os serviços apenas para fins legais e legítimos.</li>
+              <li>Propriedade Intelectual: Todos os direitos sobre os produtos e conteúdos pertencem à JOROGOTech.</li>
+              <li>Limitação de Responsabilidade: Não nos responsabilizamos por danos resultantes do uso indevido.</li>
+              <li>Alterações: Estes termos podem ser atualizados sem aviso prévio.</li>
+            </ul>
+            <button onClick={() => setModal(null)} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">Fechar</button>
+          </div>
+        </div>
+      )}
+      {modal === "privacy" && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-slate-800 p-6 rounded-lg max-w-lg w-full relative">
+            <button onClick={() => setModal(null)} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-gray-300">&times;</button>
+            <h2 className="text-xl font-bold mb-4">Política de Privacidade</h2>
+            <p className="text-gray-600 dark:text-slate-300">A JOROGOTech respeita sua privacidade e está comprometida com a proteção de seus dados:</p>
+            <ul className="list-disc pl-5 text-gray-600 dark:text-slate-300 mt-3">
+              <li>Coleta de Dados: Apenas informações necessárias para funcionamento do site e serviços.</li>
+              <li>Uso de Dados: Para comunicação, suporte e melhoria dos serviços.</li>
+              <li>Cookies: Utilizados para melhorar sua experiência.</li>
+              <li>Compartilhamento: Não compartilhamos dados pessoais sem consentimento.</li>
+            </ul>
+            <button onClick={() => setModal(null)} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">Fechar</button>
+          </div>
+        </div>
+      )}
+      {modal === "support" && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-slate-800 p-6 rounded-lg max-w-lg w-full relative">
+            <button onClick={() => setModal(null)} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-gray-300">&times;</button>
+            <h2 className="text-xl font-bold mb-4">Centro de Suporte JOROGOTech</h2>
+            <p className="text-gray-600 dark:text-slate-300 mb-4">Encontra ajuda rápida para resolver dúvidas, problemas técnicos ou pedidos de assistência.</p>
+            <form onSubmit={(e) => { e.preventDefault(); setSuccessMessage("✅ O teu pedido de suporte foi enviado! A equipa técnica da JOROGOTech responderá em até 24 horas úteis."); setModal(null); }}>
+              <input type="text" placeholder="Nome completo" required className="w-full mb-3 p-2 border rounded" />
+              <input type="email" placeholder="E-mail de login" required className="w-full mb-3 p-2 border rounded" />
+              <select className="w-full mb-3 p-2 border rounded">
+                <option>Assistente de Atendimento</option>
+                <option>Finance Planner</option>
+                <option>Gibbon EDU</option>
+              </select>
+              <select className="w-full mb-3 p-2 border rounded">
+                <option>Erro técnico</option>
+                <option>Acesso</option>
+                <option>Pagamento</option>
+                <option>Sugestão</option>
+              </select>
+              <textarea placeholder="Mensagem detalhada" required className="w-full mb-3 p-2 border rounded"></textarea>
+              <input type="file" className="w-full mb-3 p-2 border rounded" />
+              <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg">Enviar Pedido</button>
+            </form>
+            <div className="mt-4 text-sm text-gray-500">
+              <p>E-mail: support.jorogotech@gmail.com</p>
+              <p>Portal: https://jorogotech.github.io/support</p>
+              <p>WhatsApp Técnico: +244 923 000 000</p>
+              <p>Atendimento: Segunda a Sábado — 8h às 20h</p>
+            </div>
+          </div>
+        </div>
+      )}
+      {modal === "contact" && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-slate-800 p-6 rounded-lg max-w-lg w-full relative">
+            <button onClick={() => setModal(null)} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-gray-300">&times;</button>
+            <h2 className="text-xl font-bold mb-4">Entre em contacto com a JOROGOTech</h2>
+            <p className="text-gray-600 dark:text-slate-300 mb-4">Estamos prontos para colaborar, desenvolver soluções inteligentes e transformar ideias em tecnologia.</p>
+            <form onSubmit={(e) => { e.preventDefault(); setSuccessMessage("✅ Obrigado! A tua mensagem foi enviada com sucesso. Em breve entraremos em contacto."); setModal(null); }}>
+              <input type="text" placeholder="Nome completo" required className="w-full mb-3 p-2 border rounded" />
+              <input type="email" placeholder="E-mail" required className="w-full mb-3 p-2 border rounded" />
+              <input type="text" placeholder="Assunto" required className="w-full mb-3 p-2 border rounded" />
+              <textarea placeholder="Mensagem" required className="w-full mb-3 p-2 border rounded"></textarea>
+              <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg">Enviar Mensagem</button>
+            </form>
+            <div className="mt-4 text-sm text-gray-500">
+              <p>E-mail: jorogotech.contact@gmail.com</p>
+              <p>Website: https://jorogotech.github.io</p>
+              <p>WhatsApp: +244 923 000 000</p>
+              <p>Localização: Luanda, Angola</p>
+              <p>Horário: Segunda a Sexta — 8h às 17h</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Success Message */}
+      {successMessage && (
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg">
+          {successMessage}
+          <button onClick={() => setSuccessMessage(null)} className="ml-4 text-sm underline">Fechar</button>
+        </div>
+      )}
     </div>
   );
 }
